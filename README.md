@@ -100,3 +100,23 @@ gulp.task('watch', function() {
 ...
 gulp.task('default', ['run','watch']);
 ```
+14. Add npm packages for babel (to convert latest js to browser compatible js)
+```
+npm install --save-dev gulp-babel babel-core babel-preset-env
+```
+15. Update gulp file to add a task and add in to run and watch tasks
+``` javascript
+...
+var babel = require('gulp-babel');
+...
+gulp.task('babel', () =>
+	gulp.src('./js/*.js')
+		.pipe(babel({
+			presets: ['env']
+		}))
+		.pipe(gulp.dest('./dist/js/'))
+);
+...
+gulp.task('run', ['sass','css','babel']);
+...
+```

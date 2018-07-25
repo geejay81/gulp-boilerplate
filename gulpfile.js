@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var uglifycss = require('gulp-uglifycss');
+var babel = require('gulp-babel');
 
 gulp.task('sass', function() {
     return gulp.src('./sass/*.sass')
@@ -13,10 +14,18 @@ gulp.task('css', function() {
         .pipe(uglifycss({
             "uglyComments": true
         }))
-        .pipe(gulp.dest('./dist/'))
+        .pipe(gulp.dest('./dist/css/'))
 });
 
-gulp.task('run', ['sass','css']);
+gulp.task('babel', () =>
+	gulp.src('./js/*.js')
+		.pipe(babel({
+			presets: ['env']
+		}))
+		.pipe(gulp.dest('./dist/js/'))
+);
+
+gulp.task('run', ['sass','css','babel']);
 
 gulp.task('watch', function() {
     gulp.watch('./sass/*.sass', ['sass']);
