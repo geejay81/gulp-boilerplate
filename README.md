@@ -3,6 +3,7 @@
 ## Features of the project
 
 - SASS files built to minified CSS
+- TODO: Babel Javascript minification
 
 ## Using the boilerplate
 
