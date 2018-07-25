@@ -120,3 +120,20 @@ gulp.task('babel', () =>
 gulp.task('run', ['sass','css','babel']);
 ...
 ```
+16. Copy across the html files to the dist folder
+``` javascript
+...
+gulp.task('html', function() {
+    return gulp.src('*.html').pipe(gulp.dest('./dist/'));
+});
+...
+gulp.task('run', ['sass','css','babel','html']);
+
+gulp.task('watch', function() {
+    gulp.watch('./sass/*.sass', ['sass']);
+    gulp.watch('./css/*.css', ['css']);
+    gulp.watch('./js/*.js', ['babel']);
+    gulp.watch('*.html', ['html'])
+});
+...
+```

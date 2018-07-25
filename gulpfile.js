@@ -25,11 +25,17 @@ gulp.task('babel', () =>
 		.pipe(gulp.dest('./dist/js/'))
 );
 
-gulp.task('run', ['sass','css','babel']);
+gulp.task('html', function() {
+    return gulp.src('*.html').pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('run', ['sass','css','babel','html']);
 
 gulp.task('watch', function() {
     gulp.watch('./sass/*.sass', ['sass']);
-    gulp.watch('css/*.css', ['css']);
+    gulp.watch('./css/*.css', ['css']);
+    gulp.watch('./js/*.js', ['babel']);
+    gulp.watch('*.html', ['html'])
 });
 
 gulp.task('default', ['run','watch']);
