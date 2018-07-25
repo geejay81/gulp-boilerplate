@@ -15,3 +15,12 @@ gulp.task('css', function() {
         }))
         .pipe(gulp.dest('./dist/'))
 });
+
+gulp.task('run', ['sass','css']);
+
+gulp.task('watch', function() {
+    gulp.watch('./sass/*.sass', ['sass']);
+    gulp.watch('css/*.css', ['css']);
+});
+
+gulp.task('default', ['run','watch']);

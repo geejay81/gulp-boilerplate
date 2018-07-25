@@ -4,6 +4,17 @@
 
 - SASS files built to minified CSS
 
+## Using the boilerplate
+
+1. Install the dependancies
+```
+npm install
+```
+2. Run the gulp task
+```
+gulp
+```
+
 ## Steps used to create this project
 
 1. Install Gulp CLI
@@ -68,4 +79,23 @@ gulp.task('css', function() {
         }))
         .pipe(gulp.dest('./dist/'))
 });
+```
+11. Add gulp task to run the sass and css tasks in one go
+``` javascript
+...
+
+gulp.task('run', ['sass','css']);
+```
+12. Add gulp task to watch for changes to sass and css files in the project
+``` javascript
+...
+gulp.task('watch', function() {
+    gulp.watch('./sass/*.sass', ['sass']);
+    gulp.watch('css/*.css', ['css']);
+});
+```
+13. Add default gulp task that will initially 'run' then 'watch'
+``` javascript
+...
+gulp.task('default', ['run','watch']);
 ```
