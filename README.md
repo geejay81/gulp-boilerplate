@@ -4,6 +4,7 @@
 
 - SASS files built to minified CSS
 - Babel Javascript conversion
+- Bulma CSS Framework included
 
 ## Using the boilerplate
 
@@ -136,4 +137,12 @@ gulp.task('watch', function() {
     gulp.watch('*.html', ['html'])
 });
 ...
+```
+17. Install Bulma from npm
+``` 
+npm install bulma --save-dev
+```
+18. Add link to the top of our sass/styles.sass to point to the bulma.sass file in the node_modules/bulma folder
+``` css
+@import '../node_modules/bulma/bulma.sass';
 ```
