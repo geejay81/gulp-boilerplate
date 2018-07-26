@@ -146,3 +146,5 @@ npm install bulma --save-dev
 ``` css
 @import '../node_modules/bulma/bulma.sass';
 ```
+19. Edit Bulma global variables in the _variables.sass file
+> For more on Bulma variables, visit [https://bulma.io/documentation/customize/variables/](https://bulma.io/documentation/customize/variables/)
