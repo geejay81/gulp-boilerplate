@@ -5,6 +5,7 @@
 - SASS files built to minified CSS
 - Babel Javascript conversion
 - Bulma CSS Framework included
+- BrowserSync for live reloading of browser after code changes
 
 ## Using the boilerplate
 
@@ -148,3 +149,41 @@ npm install bulma --save-dev
 ```
 19. Edit Bulma global variables in the _variables.sass file
 > For more on Bulma variables, visit [https://bulma.io/documentation/customize/variables/](https://bulma.io/documentation/customize/variables/)
+20. Add Browser Sync for live reloading of changes
+```
+npm install browser-sync --save-dev
+```
+21. Update gulpfile to use Browser Sync
+``` javascript
+... 
+// require the browser-sync package and create an instance at the top of the file
+var browserSync = require('browser-sync').create();
+... 
+// add the browserSync task to initalise it - I've put this as the first task as it has no other task dependencies
+gulp.task('browserSync', function() {
+    browserSync.init({
+        server: {
+            baseDir: 'dist'
+        },
+    })
+});
+...
+// pipe to reload browser after each update task
+// e.g.
+gulp.task('sass', function() {
+    return gulp.src('./sass/*.sass')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./css'));
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
+...
+// update watch task to run browserSync task first
+gulp.task('watch', ['browserSync'], function() {
+    gulp.watch('./sass/*.sass', ['sass']);
+    gulp.watch('./css/*.css', ['css']);
+    gulp.watch('./js/*.js', ['babel']);
+    gulp.watch('*.html', ['html'])
+});
+```
